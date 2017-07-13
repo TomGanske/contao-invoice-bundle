@@ -22,7 +22,7 @@ class Plugin implements BundlePluginInterface
         return [
             BundleConfig::create(CtEyeInvoiceBundle::class)
                 ->setLoadAfter([ContaoCoreBundle::class])
-                ->setReplace(['invoice_bundle']),
+                ->setReplace(['invoice']),
         ];
     }
 }
