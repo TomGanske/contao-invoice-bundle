@@ -38,6 +38,6 @@
         ]
     },
     "extra": {
-      "contao-manager-plugin": "CtEye\\Invoice\\ContaoManager\\Plugin"
+      "contao-manager-plugin": "CtEye\\InvoiceBundle\\ContaoManager\\Plugin"
     }
 }
