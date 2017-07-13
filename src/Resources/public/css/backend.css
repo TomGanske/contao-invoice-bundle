@@ -1,0 +1,17 @@
+#tl_navigation .tl_level_1_group .group-CtEyeInvoice:before {
+    background: url('../icon/invoice-icon.svg') center no-repeat;
+    content: "";
+    display: block;
+    width: 38px;
+    height: 16px;
+    float: left;
+    margin: 0 0 0 -35px
+}
+
+/* Message Box ie. Template be_invoiceFormSubmitted.html5 */
+.message-box {
+    border:#c2c342 solid 2px;
+    borer-radius:4px;
+    margin:15px;
+    padding:15px
+}

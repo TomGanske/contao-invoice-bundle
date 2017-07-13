@@ -1,0 +1,11 @@
+<?php if($this->exists): ?>
+    <div style="padding:15px;">
+        <?= sprintf($GLOBALS['TL_LANG']['InvoicePdf']['pdfExists'],$this->invoiceId) ?>
+    </div>
+<?php endif; ?>
+
+<?php if($this->notExists): ?>
+    <div style="padding:15px;">
+        <?= sprintf($GLOBALS['TL_LANG']['InvoicePdf']['pdfcreated'],$this->invoice->invoiceId,$this->path) ?>
+    </div>
+<?php endif; ?>

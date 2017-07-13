@@ -1,0 +1,9 @@
+<div id="tl_buttons">
+    <a href="<?php echo $this->hrefNext; ?>" class="header_back" title="<?=$this->goNext?>" accesskey="b" onclick="Backend.getScrollOffset();"><?=$this->goNext?></a>
+</div>
+
+<?=\Message::generate()?>
+
+<div class="message-box">
+    <?=$this->message?>
+</div>

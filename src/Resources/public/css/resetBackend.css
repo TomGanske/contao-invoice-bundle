@@ -1,0 +1,45 @@
+#header {
+	display: none;
+}
+
+#left {
+	display: none;
+}
+
+#container {
+	width: auto;
+}
+
+#main {
+	float: none;
+	width: auto;
+	border: none;
+	box-shadow: none;
+}
+
+#footer {
+	display: none;
+}
+
+
+div.error {
+	padding: 15px;
+	font-weight: bold;
+	color: #F00;
+}
+
+
+body {
+	background: none;
+}
+
+h1 {
+	display:none;
+}
+
+@media print {
+    .no-print, .no-print * {
+        display:none !important;
+        visibility: hidden !important;
+    }
+}

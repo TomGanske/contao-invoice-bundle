@@ -1,0 +1,9 @@
+services:
+  kernel_bundle:
+    class: CtEye\InvoiceBundle\CtEyeInvoiceBundle
+#
+#  cteye_invoice.datacontainer.outbox:
+#    class: CtEye/InvoiceBundle/DataContainer/OutboxDataContainer
+#    arguments:
+#      - '@doctrine.orm.default_entity_manager'
+#      - '@cteye_invoice.service.outboxservice'

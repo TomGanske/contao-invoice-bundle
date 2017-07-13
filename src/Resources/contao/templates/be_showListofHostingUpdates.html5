@@ -1,0 +1,27 @@
+<div>
+
+    <div id="tl_buttons">
+        <a href="<?= $this->hrefBack; ?>" class="header_back" title="<?= $this->goBack; ?>" accesskey="b" onclick="Backend.getScrollOffset();"><?= $this->goBack; ?></a>
+    </div>
+
+    <h2 class="sub_headline"><?= $this->headline ?></h2>
+
+    <div class="tl_listing_container list_view">
+    <?php if(is_array($this->domains)): ?>
+        <?php foreach($this->domains as $v): ?>
+
+            <div class="clr">
+                <ul>
+                    <li><?= $v['company']?></li>
+                    <li>
+                        <ul>
+                            <li><?=date($GLOBALS['TL_CONFIG']['dateFormat'],$v['invoicePayDate'])?></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+        <?php endforeach; ?>
+    <?php endif; ?>
+    </div>
+</div>

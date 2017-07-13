@@ -1,0 +1,77 @@
+<div class="no-print col-xs-12">
+    <form action="contao/main.php" method="get" id="frmYearSelect">
+        <input type="hidden" name="do" value="InvoiceInvoice" />
+        <input type="hidden" name="key" value="financialDocument" />
+        <input type="hidden" name="popup" value="1" />
+        <button class="tl_submit" style="float:right" accesskey="p" onclick="window.print();">Print</button>
+        <div style="float:right;margin-right:20px;">
+            <select name="year" id="ctrl_year" class="tl_select">
+                <?php foreach($this->years as $year): ?>
+                <option value="<?= $year ?>" <?= (($year == $this->year)? "selected=selected":""); ?>><?= $year; ?></option>
+                <?php endforeach; ?>
+            </select>
+            <script type="text/javascript">
+                window.addEvent('domready', function() {
+                    $('ctrl_year').addEvent('change', function() {
+                        $('frmYearSelect').submit();
+                    });
+                });
+            </script>
+        </div>
+    </form>
+</div>
+
+<div class="col-xs-12">
+    <div class="col-xs-12" style="text-align:center;padding:10px;">
+        <span style="border:#000 solid 2px;padding:5px 10px;"><?= sprintf($GLOBALS['TL_LANG']['Invoice']['financialOffice'],$this->year) ?></span>
+    </div>
+    <h3><?= $this->business->company?></h3>
+    <div class="col-xs-6">
+        <address>
+            <?= $this->business->firstname." ".$this->business->lastname?><br>
+            <?= $this->business->street?>, <?= $this->business->zip." ".$this->business->town?><br>
+            <?= $this->getCountries()[$this->business->country]?>
+        </address>
+    </div>
+    <div class="col-xs-6 text-right">
+        VAT Nr: <?= $this->business->vatnr?><br>
+        Fon: <?= $this->business->phone?>
+    </div>
+
+
+
+    <table class="table table-striped">
+        <thead>
+            <th>Pos</th>
+            <th>Customer</th>
+            <th>PaidOn</th>
+            <th class="text-right">Price</th>
+            <th class="text-right">Tax</th>
+            <th class="text-right">TotalPrice</th>
+        </thead>
+        <tbody>
+
+        <?php $i = 1; ?>
+        <?php while($this->invoices->next()): ?>
+            <tr>
+                <td><?= $i; $i++; ?></td>
+                <td>
+                    <?= $this->customers[$this->invoices->customerId]['company']." (Nr: ".$this->invoices->invoiceId.")"?><br>
+                    <?= $this->customers[$this->invoices->customerId]['firstname']." ".$this->customers[$this->invoices->customerId]['lastname']?>
+                </td>
+                <td><?= date($GLOBALS['TL_CONFIG']['dateFormat'],$this->invoices->paidOn)?></td>
+                <td class="text-right"><?= CtEye\Invoice\Invoice::getPrice($this->invoices->price,$this->settings[$this->customers[$this->invoices->customerId]['settingId']])?></td>
+                <td class="text-right"><?= CtEye\Invoice\Invoice::getPrice($this->invoices->tax,$this->settings[$this->customers[$this->invoices->customerId]['settingId']])?></td>
+                <td class="text-right"><?= CtEye\Invoice\Invoice::getPrice($this->invoices->totalPrice,$this->settings[$this->customers[$this->invoices->customerId]['settingId']])?></td>
+            </tr>
+        <?php endwhile; ?>
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="5"></td>
+                <td style="text-align:right"><?= CtEye\Invoice\Invoice::getPrice($this->annualAmount,$this->settings[$this->customers[$this->invoices->customerId]['settingId']]) ?></td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

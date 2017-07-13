@@ -1,0 +1,230 @@
+<style>
+	body {
+		font-size:1.2em !important;
+	}
+	.underline-one, .underline-two {
+		border-bottom:#777 solid 1px;
+		
+	}
+	.underline-one {
+		padding:12.5px 0 !important;
+	}
+	.underline-two {
+		padding:10px 0 0 0!important;
+	}
+
+
+	.receipt {
+		padding-top:30px;
+		font-size:1.4em;
+	}
+	.address {
+		padding:0 !important;
+		margin-bottom:9px !important;
+		margin-right:15px !important;
+	}
+	.title {
+		position:absolute;
+		left:70px;
+		color:#777;
+		font-size:3em;
+	}
+	.title span {
+		font-size:0.6em;
+	}
+
+	ul {
+		margin-left:15px!important;
+	}
+
+	li {
+		list-style: disc !important;
+	}
+	table {
+		margin-bottom:0!important;
+	}
+
+	.info td:first-child {
+		width:120px!important;
+	}
+
+</style>
+
+
+<div class="row">
+    <div class="col-xs-6" style="border:#000000 solid 1px;">
+        <div class="col-xs-6">
+            FROM:<br>
+            <?= $this->business->firstname . ' ' . $this->business->lastname ?><br>
+            <?= $this->business->email ?><br>
+            <?= $this->business->phone ?>
+        </div>
+        <div class="col-xs-6">
+            <br>
+            <?= $this->business->street ?><br>
+            <?= $this->business->zip . ' ' . $this->business->town ?><br>
+            <?= $this->getCountries()[$this->business->country] ?>
+        </div>
+    </div>
+    <div class="col-xs-6" style="border:#000000 solid 1px;">
+        <div class="col-xs-6">
+            TO:<br>
+            <?= $this->customer->title; ?><br>
+            <?= $this->customer->firstname . ' ' . $this->customer->lastname ?><br>
+            <?= $this->customer->street ?><br>
+            <?= $this->customer->zip . ' ' . $this->customer->town ?><br>
+            <?= $this->getCountries()[$this->business->country] ?><br>
+            <?= $this->customer->email ?>
+        </div>
+        <div class="col-xs-6">
+            Test
+        </div>
+    </div>
+</div>
+
+
+	<div class="col-xs-7 underline-one" style="position:relative;height:50px;">
+		<img src="<?= $this->logo?>" width="50px" height="auto" style="position:absolute;left:0;">
+		<div class="title">CT-EYE<span>®</span></div>
+	</div>
+	<div class="col-xs-5 underline-two text-right">
+		<address class="address">
+			Tom Ganske<br>
+			Eythraer Str. 9<br>
+			D-04229 Leipzig
+		</address>
+	</div>
+	<div class="col-xs-7 receipt">
+		<strong>An</strong>
+		<address>
+			<?= $this->customer['company']; ?>
+			<br>
+			<br>
+			<?php if(!empty($this->customer['lastname'])): ?>
+
+				<?= $this->customer['firstname']; ?> <?= $this->customer['lastname']; ?><br/>
+			<?php endif; ?>
+				<?= $this->customer['street']; ?><br>
+				<?= $this->customer['zip']; ?> <?= $this->customer['town']; ?><br>
+				<?= $this->customer['country']; ?>
+		<address>
+	</div>
+	<div class="col-xs-5 info">
+		<table class="table table-condensed table-striped">
+			<thead>
+			<tr>
+					<th colspan="2"><strong>Kontakt</strong></th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>Telefon</td>
+				<td>0157 747 29 84 3</td>
+			</tr>
+			<tr>
+				<td>E-Mail</td>
+				<td>TomGanske@ct-eye.de</td>
+			</tr>
+			<tr>
+				<td>Webseite</td>
+				<td>www.ct-eye.de</td>
+			</tr>
+			<tr>
+				<td>USt-IdNr.</td>
+				<td>DE296653492</td>
+			</tr>
+			</tbody>
+		</table>
+		<table class="table table-condensed table-striped">
+			<thead>
+			<tr>
+				<th colspan="2"><strong>Rechnung</strong></th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td>Auftragsnummer</td>
+				<td><strong><?= $this->invoiceId; ?></strong></td>
+			</tr>
+			<tr>
+				<td>Rechnungsdatum</td>
+				<td><?= $this->invoiceDate; ?></td>
+			</tr>
+			<tr>
+				<td>Zeitaufwand</td>
+				<td><?=$this->totalHours?> Stunden</td>
+			</tr>
+			<tr>
+				<td>Domain</td>
+				<td><?= $this->customer['url']; ?></td>
+			</tr>
+			<tr>
+				<td>Zahlungsziel</td>
+				<td><?= $this->payDay; ?></td>
+			</tr>
+			<tr>
+				<td><strong>Rechnungsbetrag</strong></td>
+				<td><strong><?= $this->invoicePrice; ?> €</strong></td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="col-xs-12">
+		<table class="table table-condensed table-striped">
+			<thead>
+			<tr>
+				<th colspan="6"><strong>Leistungen</strong></th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<th style="width:20px;">Pos</th>
+				<th>Beschreibung der Tätigkeit</th>
+			</tr>
+			<?php $i=1; ?>
+			<?php foreach($this->invoicesElement as $k => $v): ?>
+			<tr>
+				<td><?= $i;$i++; ?></td>
+				<td>
+					<strong><?= $v['headline']; ?></strong>
+					<?= str_replace("[nbsp]"," ",$v['description']); ?>
+				</td>
+			</tr>
+			<?php endforeach; ?>
+			</tbody>
+		</table>
+	</div>
+	<div class="col-xs-12">
+		<hr>
+		<p>Mit freundlichem Gruß</p>
+		<p>Tom Ganske</p>
+		<p>&nbsp;</p>
+	</div>
+	<div class="col-xs-12">
+		<p>- gem. §19 des UStG - Kleinunternehmerregelung ist CT-EYE umsatzsteuerbefreit<br>- bei Überweisung immer die Auftragsnummer als Verwendungszweck angeben</p>
+	</div>
+	<div class="col-xs-12">
+		<table class="table table-condensed table-striped">
+			<thead>
+			<tr>
+				<th colspan="5" class="text-left"><strong>Bankdaten</strong></th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<th style="width:100px;"></th>
+				<th><strong>Inhaber</strong></th>
+				<th><strong>IBAN</strong></th>
+				<th><strong>BIC</strong></th>
+				<th><strong>Institut</strong></th>
+			</tr>
+			<tr>
+				<td></td>
+				<td>Tom Ganske</td>
+				<td>DE 76 120 300 00 101 33 2 33 30</td>
+				<td>BYLADEM1001</td>
+				<td>Deutsche Kreditbank</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>

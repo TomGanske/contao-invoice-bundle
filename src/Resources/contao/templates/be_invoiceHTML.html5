@@ -1,0 +1,173 @@
+<style>
+    body {
+        font-size:1.2em !important;
+    }
+    table {
+        margin-bottom:0!important;
+    }
+    .info td:first-child {
+        width:120px!important;
+    }
+    li.urgent {
+        color:#e2b347;
+        font-weight:bold;
+    }
+    strong.tray {
+        color:#e2b347;
+    }
+    h4 {
+        margin-top:45px!important;
+    }
+    @media print {
+        .printButton {
+            display: none;
+            visibility:hidden;
+        }
+    }
+</style>
+
+<div class="col-xs-4" style="border-left:#e9e9e9 solid 1px;border-right:#e9e9e9 solid 1px;">
+    <div class="col-xs-12">
+        <strong class="tray"><?= $this->translation['_to'] ?></strong><br>
+        <?php if(!empty($this->customer->company)): ?>
+            <strong><?= $this->customer->company?></strong><br>
+        <?php else: ?>
+        <strong><?= $this->customer->firstname . ' ' . $this->customer->lastname ?></strong><br>
+        <?php endif;?>
+        <?= $this->customer->street ?><br>
+        <?= $this->customer->zip . ' ' . $this->customer->town ?><br>
+        <?= $this->getCountries()[$this->customer->country] ?><br>
+        <?= $this->customer->email ?>
+    </div>
+</div>
+
+<div class="col-xs-8">
+    <div class="col-xs-4">
+        <strong class="tray"><?= $this->translation['_from'] ?></strong><br>
+        <?= $this->business['company'] ?><br>
+        <?= $this->business['firstname'] . ' ' . $this->business['lastname'] ?><br>
+        <?= $this->business['email'] ?><br>
+        <?= $this->business['phone'] ?>
+    </div>
+    <div class="col-xs-4">
+        <br>
+        <br>
+        <?= $this->business['street'] ?><br>
+        <?= $this->business['zip'] . ' ' . $this->business['town'] ?><br>
+        <?= $this->getCountries()[$this->business['country']] ?>
+    </div>
+    <div class="col-xs-4 text-right">
+        <img src="<?=$this->logo?>" border="0" width="100px" style="margin-top:13px"/>
+    </div>
+</div>
+<div class="col-xs-12">
+    <h4><?= $this->translation['invoiceTitle']?></h4>
+</div>
+<div class="col-xs-12" style="margin-bottom:50px">
+    <ul class="invoiceDetails">
+        <li class="urgent col-xs-4"><?= $this->translation['invoiceNo'] . ' ' . $this->invoice->invoiceId?></li>
+        <li class="col-xs-4"><?= $this->translation['invoiceDate'] . ' ' . date($GLOBALS['TL_CONFIG']['dateFormat'],$this->invoice->date) ?></li>
+        <li class="col-xs-4"><?= $this->translation['invoiceDue'] . ' ' . date($GLOBALS['TL_CONFIG']['dateFormat'],$this->invoice->payDay) ?></li>
+    </ul>
+</div>
+
+<div class="col-xs-12">
+    <table class="table table-condensed table-striped">
+        <thead>
+            <tr>
+                <th colspan="3"><strong><?= $this->translation['service'] ?></strong></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th style="width:20px;"><?= $this->translation['pos'] ?></th>
+                <th><?= $this->translation['description'] ?></th>
+                <th style=" width:100px;text-align:right"><?= $this->translation['price'] ?></th>
+            </tr>
+
+            <?php $i=1; ?>
+            <?php while($this->invoicesElement->next()): ?>
+            <tr>
+                <td><?= $i;$i++; ?></td>
+                <td>
+                    <strong><?= $this->invoicesElement->headline ?></strong><br/>
+                    <?= str_replace("[nbsp]"," ",$this->invoicesElement->description); ?>
+                </td>
+                <td style="text-align:right"><?= (($this->invoicesElement->price != 0) ? number_format($this->invoicesElement->price,$this->settings['centValue'],$this->settings['dec_point'],$this->settings['thousands_sep']) . ' ' .$this->settings['currency'] : '')?></td>
+            </tr>
+            <?php endwhile; ?>
+
+            <?php if($this->business['setTax'] && ($this->invoice->payDay > $this->business['taxStartDate']) ): ?>
+            <tr>
+                <td colspan="2" style="text-align:right"><?= $this->translation['subtotal'] ?></td>
+                <td style="text-align:right">
+                    <?= number_format($this->invoice->totalPrice,$this->settings['centValue'],$this->settings['dec_point'],$this->settings['thousands_sep']) . ' ' .$this->settings['currency']?>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:right"><?=$this->translation['taxtitle']. " " .$this->business['tax'] . " %" ?></td>
+                <td style="text-align:right">+
+                    <?= number_format($this->invoice->taxprice,$this->settings['centValue'],$this->settings['dec_point'],$this->settings['thousands_sep']) . ' ' .$this->settings['currency'] ?>
+                </td>
+            </tr>
+            <?php endif; ?>
+
+        </tbody>
+        <tfoot>
+        <?php if($this->business['setTax'] && ($this->invoice->payDay < $this->business['taxStartDate']) ): ?>
+            <tr>
+                <td colspan="2" style="text-align:right;font-weight:bold"><?= $this->translation['totalprice'] ?></td>
+                <td style="text-align:right;font-weight:bold">
+                    <?= number_format($this->invoice->totalPrice+$this->invoice->taxprice,$this->settings['centValue'],$this->settings['dec_point'],$this->settings['thousands_sep']) . ' ' .$this->settings['currency']?>
+                </td>
+            </tr>
+        <?php else: ?>
+            <tr>
+                <td colspan="2" style="text-align:right;font-weight:bold"><?= $this->translation['totalprice'] ?></td>
+                <td style="text-align:right;font-weight:bold">
+                    <?= number_format($this->invoice->totalPrice,$this->settings['centValue'],$this->settings['dec_point'],$this->settings['thousands_sep']) . ' ' .$this->settings['currency']?>
+                </td>
+            </tr>
+        <?php endif; ?>
+
+        </tfoot>
+    </table>
+</div>
+
+<div class="col-xs-12">
+	<hr>
+	<?= $this->translation['regards'] ?>
+    <p><img src="<?=$this->sign?>" border="0" width="100px" style="margin-top:13px"/></p>
+	<p><?= $this->business['firstname'] . ' ' . $this->business['lastname']?></p>
+	<p>&nbsp;</p>
+</div>
+
+<div class="col-xs-12">
+    <p><?= $this->settings->footerComment ?></p>
+</div>
+
+<div class="col-xs-12">
+	<table class="table table-condensed table-striped">
+		<thead>
+		<tr>
+			<th colspan="5" class="text-left"><strong><?= $this->translation['bankHeadline'] ?></strong></th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<th><strong><?= $this->translation['bankRecipient'] ?></strong></th>
+			<th><strong><?= $this->translation['bankIBAN'] ?></strong></th>
+			<th><strong><?= $this->translation['bankBIC'] ?></strong></th>
+			<th><strong><?= $this->translation['bankName'] ?></strong></th>
+            <th><strong><?= $this->translation['vatnr'] ?></strong></th>
+		</tr>
+		<tr>
+			<td><?= $this->business['firstname'] . ' ' . $this->business['lastname']?></td>
+			<td><?= $this->business['iban']?></td>
+			<td><?= $this->business['bic']?></td>
+			<td><?= $this->business['bank']?></td>
+            <td><?= $this->business['vatnr']?></td>
+		</tr>
+		</tbody>
+	</table>
+</div>
