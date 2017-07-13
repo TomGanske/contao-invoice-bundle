@@ -7,7 +7,7 @@ Contao 4 - Invoice Bundle
 Developer:  Tom Ganske, CT-EYE
 Website:    http://www.ct-eye.com
 Year:       2017
-Version:    0.0.2
+Version:    0.0.1
 CMS:        Contao 4 Bundle
 ```
 
