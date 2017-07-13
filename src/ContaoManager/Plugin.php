@@ -2,7 +2,6 @@
 
 namespace CtEye\InvoiceBundle\ContaoManager;
 
-use Contao\CoreBundle\ContaoCoreBundle;
 use Contao\ManagerPlugin\Bundle\Config\BundleConfig;
 use Contao\ManagerPlugin\Bundle\BundlePluginInterface;
 use Contao\ManagerPlugin\Bundle\Parser\ParserInterface;
@@ -20,8 +19,8 @@ class Plugin implements BundlePluginInterface
     public function getBundles(ParserInterface $parser)
     {
         return [
-            BundleConfig::create(CtEyeInvoiceBundle::class)
-                ->setLoadAfter([ContaoCoreBundle::class])
+            BundleConfig::create('CtEye\InvoiceBundle\CtEyeInvoiceBundle')
+                ->setLoadAfter(['Contao\CoreBundle\ContaoCoreBundle'])
                 ->setReplace(['invoice']),
         ];
     }
