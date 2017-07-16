@@ -58,7 +58,7 @@ $GLOBALS['TL_DCA']['tl_invoice_customers'] = array
           'icon'    => 'show.gif'
       ),
       'delete'  => array(
-          'label'   => &$GLOBALS['TL_LANG']['tl_invoice_customers']['show'],
+          'label'   => &$GLOBALS['TL_LANG']['tl_invoice_customers']['delete'],
           'href'    => 'act=delete',
           'icon'    => 'delete.gif'
       )
@@ -123,7 +123,7 @@ $GLOBALS['TL_DCA']['tl_invoice_customers'] = array
     ),
     'salutation' => array
     (
-        'label'           => &$GLOBALS['TL_LANG']['tl_invoice_business']['salutation'],
+        'label'           => &$GLOBALS['TL_LANG']['tl_invoice_customers']['salutation'],
         'exclude'         => true,
         'inputType'       => 'select',
         'options'         => array(
@@ -285,6 +285,11 @@ class tl_invoice_customers extends Backend
 
         // set destination path on SERVER
         $destinationPath = $_SERVER['DOCUMENT_ROOT']."/".$path."/".$dc->activeRecord->invoiceId;
+
+
+        #var_dump($_SERVER);
+        #var_dump($_SERVER['DOCUMENT_ROOT']);
+        #var_dump($destinationPath);
 
         // create custom folder by invoiceId as Primary Key
         if(!file_exists($destinationPath))

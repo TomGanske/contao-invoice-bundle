@@ -108,11 +108,8 @@ $GLOBALS['TL_DCA']['tl_invoice_business'] = array
       'label'           => &$GLOBALS['TL_LANG']['tl_invoice_business']['title'],
       'exclude'         => true,
       'inputType'       => 'select',
-      'options'         => array(
-          $GLOBALS['TL_LANG']['tl_invoice_business']['title']['value'][0],
-          $GLOBALS['TL_LANG']['tl_invoice_business']['title']['value'][1],
-          $GLOBALS['TL_LANG']['tl_invoice_business']['title']['value'][2],
-      ),
+      'options'         => array(0,1,2),
+      'reference'       => $GLOBALS['TL_LANG']['tl_invoice_business']['title']['value'],
       'eval'            => array(
           'includeBlankOption' => true,
           'tl_class' => 'w50'
@@ -124,11 +121,8 @@ $GLOBALS['TL_DCA']['tl_invoice_business'] = array
         'label'           => &$GLOBALS['TL_LANG']['tl_invoice_business']['salutation'],
         'exclude'         => true,
         'inputType'       => 'select',
-        'options'         => array(
-            $GLOBALS['TL_LANG']['tl_invoice_business']['salutation']['value'][0],
-            $GLOBALS['TL_LANG']['tl_invoice_business']['salutation']['value'][1],
-            $GLOBALS['TL_LANG']['tl_invoice_business']['salutation']['value'][2],
-        ),
+        'options'         => array(0,1,2),
+        'reference'       => $GLOBALS['TL_LANG']['tl_invoice_business']['salutation']['value'],
         'eval'            => array(
             'mandatory' => true,
             'includeBlankOption' => true,

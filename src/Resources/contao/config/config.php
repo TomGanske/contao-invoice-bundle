@@ -6,10 +6,10 @@ array_insert($GLOBALS['BE_MOD'],0, array('CtEyeInvoice' => array
         'tables' 		        => array('tl_invoice_invoices','tl_invoice_invoicesElement'),
 		'invoiceHtml'	        => array('tl_invoice_invoices','invoiceHtml'),
         'saveInvoiceAsPdf'	    => array('tl_invoice_invoices','saveInvoiceAsPdf'),
-        'createHostingInvoices' => array('CtEye\\InvoiceBundle\\Invoice', 'createHostingInvoices'),
-        'amountOverview'	    => array('CtEye\\InvoiceBundle\\Invoice','amountOverview'),
-        'financialDocument'	    => array('CtEye\\InvoiceBundle\\FinancialDocument','financialDocument'),
-        'sendEmail'             => array('CtEye\\InvoiceBundle\\InvoiceEmail','prepareSendEmailAttachedInvoice')
+        'createHostingInvoices' => array('CtEye\\Invoice\\Invoice', 'createHostingInvoices'),
+        'amountOverview'	    => array('CtEye\\Invoice\\Invoice','amountOverview'),
+        'financialDocument'	    => array('CtEye\\Invoice\\FinancialDocument','financialDocument'),
+        'sendEmail'             => array('CtEye\\Invoice\\InvoiceEmail','prepareSendEmailAttachedInvoice')
     ),
     'InvoiceClients' => array
     (
@@ -39,7 +39,7 @@ array_insert($GLOBALS['BE_MOD'],0, array('CtEyeInvoice' => array
 
 
 // Top Level Domains
-$GLOBALS['Invoice']['tld'] = array('.com', '.org', '.ch', '.de');
+$GLOBALS['Invoice']['tld'] = array('.com','.ch','.de','.org','.biz','.io','.info');
 
 
 if (TL_MODE == 'BE')

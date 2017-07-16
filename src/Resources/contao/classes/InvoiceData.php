@@ -14,16 +14,33 @@ class InvoiceData extends Backend
 
     public function __construct()
     {
-        $settings = \InvoiceSettingsModel::findAll()->fetchAll();
-        foreach($settings as $value) {
-            self::$settings[$value['id']] =  $value;
+        /**
+         * Fill Variable $settings if result exists
+        */
+        $settings = \InvoiceSettingsModel::findAll();
+        if($settings !== NULL) {
+            $settings = $settings->fetchAll();
+            foreach ($settings as $value) {
+                self::$settings[$value['id']] = $value;
+            }
         }
 
-        $translation = \InvoiceDocTransModel::findAll()->fetchAll();
-        foreach($translation as $value) {
-            self::$translation[$value['settingId']] =  $value;
+        /**
+         * Fill Variable $translation if result exists
+         */
+        $translation = \InvoiceDocTransModel::findAll();
+        if($translation !== NULL){
+            $translation = $translation->fetchAll();
+            foreach($translation as $value) {
+                self::$translation[$value['settingId']] =  $value;
+            }
         }
 
-        self::$business = \InvoiceBusinessModel::findAll()->last()->row();
+        /**
+         * Fill Variable $business if result exists
+         */
+        $business = \InvoiceBusinessModel::findAll();
+        if($business !== NULL)
+            self::$business = $business->last()->row();
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use CtEye\Invoice\Invoice;
 use Dompdf\Dompdf;
 use Dompdf\Options;
 
@@ -40,7 +41,8 @@ $GLOBALS['TL_DCA']['tl_invoice_invoices'] = array
   
     'global_operations' => array
     (
-      'createHostingInvoices' => array(
+      'createHostingInvoices' => array
+      (
           'label' => $GLOBALS['TL_LANG']['tl_invoice_invoices']['createHostingInvoices'],
           'href'  => 'key=createHostingInvoices',
           'icon'  => 'bundles/cteyeinvoice/icon/hosting.svg'
@@ -91,7 +93,7 @@ $GLOBALS['TL_DCA']['tl_invoice_invoices'] = array
       ),
       'saveInvoiceAsPdf'   => array
       (
-          'label'     => 'savePdf',
+          'label'     => $GLOBALS['TL_LANG']['tl_invoice_invoices']['createPdf'],
           'href'      => 'key=saveInvoiceAsPdf',
           'icon'      => 'bundles/cteyeinvoice/icon/pdf.svg',
           'attributes'=> 'onclick="if(!confirm(\'' . $GLOBALS['TL_LANG']['tl_invoice_invoices']['createPdf'] . '\'))return false;Backend.getScrollOffset()"',
@@ -115,7 +117,7 @@ $GLOBALS['TL_DCA']['tl_invoice_invoices'] = array
                        {service_legend:hide},serviceTable;
                        {price_legend:hide},pricePerHour,totalHours;
                        {miles_legend:hide},pricePerMiles,miles,milePrice;
-                       {info_legend:hide},date,invoiceId,setInvoiceNr,totalPrice,taxprice,priceManuell;
+                       {info_legend:hide},date,invoiceId,totalPrice,taxprice,priceManuell;
                        {status_legend:hide},finished,isPaid,paidOn,isSaved,isPrinted,isSend'
   ),
 
@@ -308,7 +310,7 @@ $GLOBALS['TL_DCA']['tl_invoice_invoices'] = array
    )
 );
 
-class tl_invoice_invoices extends \CtEye\Invoice\Invoice
+class tl_invoice_invoices extends Invoice
 {
 
   // calc TotalPrice
@@ -366,7 +368,7 @@ class tl_invoice_invoices extends \CtEye\Invoice\Invoice
    */
   public function loadInvoiceId($varValue,$objDca)
   {
-      if(!empty($varValue) && strpos("-",$varValue) !== false && $objDca->activeRecord->finished)
+      if(!empty($varValue) && $objDca->activeRecord->finished)
           return $varValue;
 
 
@@ -531,6 +533,9 @@ class tl_invoice_invoices extends \CtEye\Invoice\Invoice
   {
       $sql = InvoiceServicesModel::findAll(array('ORDER BY id'));
 
+      if(is_null($sql))
+          return;
+
       while ($sql->next())
       {
             $service[$sql->serviceTable] = $sql->service;
@@ -558,10 +563,10 @@ class tl_invoice_invoices extends \CtEye\Invoice\Invoice
     $customer = InvoiceCustomersModel::findBy('invoiceId',$invoice->customerId);
 
     // Load SIGN & LOGO image path
-    $objSignFile    = \FilesModel::findByUuid($this->business->sign);
+    $objSignFile    = \FilesModel::findByUuid(self::$business['sign']);
     $signImageUrl   = ($objSignFile === null) ? null : $objSignFile->path;
 
-    $objLogoFile    = \FilesModel::findByUuid($this->business->logo);
+    $objLogoFile    = \FilesModel::findByUuid(self::$business['logo']);
     $logoImageUrl   = ($objLogoFile === null) ? null : $objLogoFile->path;
 
 

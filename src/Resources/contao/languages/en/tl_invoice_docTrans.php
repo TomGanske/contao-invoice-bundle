@@ -11,7 +11,7 @@ $GLOBALS['TL_LANG']['tl_invoice_docTrans']['deleteConfirm']   = 'Do yout want de
 
 // Legend
 $GLOBALS['TL_LANG']['tl_invoice_docTrans']['language_legend']       = 'Language';
-$GLOBALS['TL_LANG']['tl_invoice_docTrans']['fldTranslate_legend']   = 'Field Translation';
+$GLOBALS['TL_LANG']['tl_invoice_docTrans']['fldTranslate_legend']   = 'Field Translation for the document';
 
 // Labels
 $GLOBALS['TL_LANG']['tl_invoice_docTrans']['from'] 	        = array('From','From field.');
@@ -22,10 +22,13 @@ $GLOBALS['TL_LANG']['tl_invoice_docTrans']['invoiceDate'] 	= array('Invoice Date
 $GLOBALS['TL_LANG']['tl_invoice_docTrans']['invoiceDue'] 	= array('Invoice Due','Invoice Due field.');
 $GLOBALS['TL_LANG']['tl_invoice_docTrans']['invoiceAmount'] = array('Invoice Amount','Invoice Amount field.');
 $GLOBALS['TL_LANG']['tl_invoice_docTrans']['price']         = array('Price','Price field.');
+$GLOBALS['TL_LANG']['tl_invoice_docTrans']['subtotal']      = array('Subtotal','Subtotal field.');
 $GLOBALS['TL_LANG']['tl_invoice_docTrans']['totalprice']    = array('Total Price','Total Price field.');
 
 $GLOBALS['TL_LANG']['tl_invoice_docTrans']['service'] 	      = array('Service','Service field.');
 $GLOBALS['TL_LANG']['tl_invoice_docTrans']['pos']             = array('Pos','Position field. ');
+$GLOBALS['TL_LANG']['tl_invoice_docTrans']['taxtitle']      = array('Tax title','Tax title field.');
+$GLOBALS['TL_LANG']['tl_invoice_docTrans']['regards']       = array('Regard','Insert the regard text which will be present below the element table.');
 
 $GLOBALS['TL_LANG']['tl_invoice_docTrans']['description']     = array('Description','Description field.');
 $GLOBALS['TL_LANG']['tl_invoice_docTrans']['vatnr']           = array('VAT Nr','VAT Nr field.');

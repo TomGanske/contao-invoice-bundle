@@ -2,7 +2,15 @@
 
 ###### Changelog 2017
 
-#### 0.0.2 (2017-06-07)
+#### 0.0.5 (2017-07-16)
+   - fix invoice Template
+   - fix queries
+   - remove autoload.ini and autoload.php
+   - add INSTALLATION.md in english and german
+   - add german translation
+   - add license file
+
+#### 0.0.2 - 0.0.4 (2017-06-07)
    - fix templates for annual overview
    - new send Invoice by E-Mail directly to customer or just a link
    - track email delivery

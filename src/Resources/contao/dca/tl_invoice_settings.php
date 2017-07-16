@@ -69,11 +69,12 @@ $GLOBALS['TL_DCA']['tl_invoice_settings'] = array
 
     'default'	        =>'	{language_legend:hide},language;
                             {format_legend:hide},currency,centValue,dec_point,thousands_sep;
-                            {invoiceDate_legend:hide},invoiceDate,invoicePayDate;
                             {textblock_legend:hide},subject,html;
                             {path_legend:hide},invoiceTree;
                             {footer_legend},footerComment;'
   ),
+   # implement later if be sure to use it really
+   #{invoiceDate_legend:hide},invoiceDate,invoicePayDate;
 
   'fields' => array
   (
@@ -98,7 +99,7 @@ $GLOBALS['TL_DCA']['tl_invoice_settings'] = array
     (
       'label'                   => &$GLOBALS['TL_LANG']['tl_invoice_settings']['currency'],
       'inputType'            	=> 'select',
-      'options'					=> array('-','€','$'),
+      'options'					=> array('-','฿','B/.','₵','₡','圓','₫','Դ','ƒ','₴','₭','kr','₦','元','₪','S/.','₱','£','€','$','R','R$','៛','﷼','₽','৲','૱','௹','〒','₮','₩','¥','Zł'),
       'search'                  => true,
       'eval'                    => array('tl_class'=>'w50'),
       'sql'                     => "varchar(19) NOT NULL default ''"
@@ -215,6 +216,15 @@ class tl_invoice_settings extends Backend
 
     public function label($label)
     {
+        /**
+         * No Translation exists
+        */
+        if(is_null($this->translations))
+            return sprintf('%s - %s %s',
+                $GLOBALS['TL_LANG']['Invoice']['settings'],
+                $this->getCountries()[$label['language']],
+                ' [ <strong style="color:#f15163">'.$GLOBALS['TL_LANG']['Invoice']['noTranslationExists'].'</strong> ]');
+
         return sprintf('%s - %s   %s',
             $GLOBALS['TL_LANG']['Invoice']['settings'],
             $this->getCountries()[$label['language']],

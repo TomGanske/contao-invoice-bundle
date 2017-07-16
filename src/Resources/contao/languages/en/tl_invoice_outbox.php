@@ -3,7 +3,7 @@
 
 // Editing
 $GLOBALS['TL_LANG']['tl_invoice_outbox']['edit']            = array('edit','Edit invoice element details.');
-$GLOBALS['TL_LANG']['tl_invoice_outbox']['delete']          = 'Delete this Log profil.';
+$GLOBALS['TL_LANG']['tl_invoice_outbox']['delete']          = 'Delete this log profile.';
 $GLOBALS['TL_LANG']['tl_invoice_outbox']['show']            = array('','detail view');
 $GLOBALS['TL_LANG']['tl_invoice_outbox']['invoicePdf']	    = array('','Invoice preview');
 $GLOBALS['TL_LANG']['tl_invoice_outbox']['deleteConfirm']   = 'Do yout want delete this entry?';

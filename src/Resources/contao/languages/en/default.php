@@ -48,3 +48,6 @@ $GLOBALS['TL_LANG']['Invoice']['emailSubmittedError']               = '<strong>A
 
 // Template Buttons, Links
 $GLOBALS['TL_LANG']['MSC']['nextBT']                                = 'Next';
+
+// Financial Dokument Messages
+$GLOBALS['TL_LANG']['Invoice']['noData']                            = 'No data saved.';

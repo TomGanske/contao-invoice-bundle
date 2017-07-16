@@ -1,16 +1,16 @@
 <?php
 // Editing
 $GLOBALS['TL_LANG']['tl_invoice_business']['new']             = array('new Business','Create a new Business.');
-$GLOBALS['TL_LANG']['tl_invoice_business']['edit']            = array('Kundenverwaltung','Kundendaten ändern.');
-$GLOBALS['TL_LANG']['tl_invoice_business']['delete']          = 'Löschen Sie diesen Kunden.';
-$GLOBALS['TL_LANG']['tl_invoice_business']['show']            = array('','Detailansicht.');
-$GLOBALS['TL_LANG']['tl_invoice_business']['deleteConfirm']   = 'Wollen Sie den Eintrag wirklich löschen?';
+$GLOBALS['TL_LANG']['tl_invoice_business']['edit']            = array('Edit customers','Edit customer data.');
+$GLOBALS['TL_LANG']['tl_invoice_business']['delete']          = 'Delete this entry.';
+$GLOBALS['TL_LANG']['tl_invoice_business']['show']            = array('','show details.');
+$GLOBALS['TL_LANG']['tl_invoice_business']['deleteConfirm']   = 'Are you sure to delete this entry?';
 
 // Legends
 $GLOBALS['TL_LANG']['tl_invoice_business']['company_legend']  = 'Company';
 $GLOBALS['TL_LANG']['tl_invoice_business']['contact_legend']  = 'Contact';
 $GLOBALS['TL_LANG']['tl_invoice_business']['bank_legend']     = 'Bank';
-$GLOBALS['TL_LANG']['tl_invoice_business']['tax_legend']     = 'Tax Info';
+$GLOBALS['TL_LANG']['tl_invoice_business']['tax_legend']      = 'Tax Info';
 $GLOBALS['TL_LANG']['tl_invoice_business']['paypal_legend']   = 'PayPal';
 $GLOBALS['TL_LANG']['tl_invoice_business']['sign_legend']     = 'Sign';
 $GLOBALS['TL_LANG']['tl_invoice_business']['logo_legend']     = 'Logo';

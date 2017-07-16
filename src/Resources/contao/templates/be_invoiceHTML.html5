@@ -26,7 +26,8 @@
     }
 </style>
 
-<div class="col-xs-4" style="border-left:#e9e9e9 solid 1px;border-right:#e9e9e9 solid 1px;">
+<div class="row">
+    <div class="col-xs-4" style="border-right:#e9e9e9 solid 1px;">
     <div class="col-xs-12">
         <strong class="tray"><?= $this->translation['_to'] ?></strong><br>
         <?php if(!empty($this->customer->company)): ?>
@@ -41,7 +42,7 @@
     </div>
 </div>
 
-<div class="col-xs-8">
+    <div class="col-xs-8">
     <div class="col-xs-4">
         <strong class="tray"><?= $this->translation['_from'] ?></strong><br>
         <?= $this->business['company'] ?><br>
@@ -60,6 +61,8 @@
         <img src="<?=$this->logo?>" border="0" width="100px" style="margin-top:13px"/>
     </div>
 </div>
+</div>
+
 <div class="col-xs-12">
     <h4><?= $this->translation['invoiceTitle']?></h4>
 </div>

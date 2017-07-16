@@ -12,15 +12,28 @@ class FinancialDocument extends Invoice
         $GLOBALS['TL_CSS']['resetBackend']  = 'bundles/cteyeinvoice/css/resetBackend.css';
         $GLOBALS['TL_CSS']['bootstrap']     = 'bundles/cteyeinvoice/css/bootstrap.min.css';
 
+
+
         // Variables
         $year       = (!empty(Input::get('year')) ? Input::get('year') : date("Y") );
 
         // Objects
-        $oBusiness  = \InvoiceBusinessModel::findAll()->last();
-        $aCustomers = \InvoiceCustomersModel::findAll()->fetchAll();
+        $oBusiness  = \InvoiceBusinessModel::findAll();
+        if(!is_null($oBusiness))
+            $oBusiness = $oBusiness->last();
+
+        $aCustomers = \InvoiceCustomersModel::findAll();
+        if(!is_null($aCustomers))
+            $aCustomers = $aCustomers->fetchAll();
+
+        if(is_null($oBusiness) || is_null($aCustomers)) {
+            $oTemplate          = new \BackendTemplate('be_noData');
+            $oTemplate->noData  = $GLOBALS['TL_LANG']['Invoice']['noData'];
+            return($oTemplate->parse());
+        }
+
         $oInvoices  = \InvoiceInvoicesModel::currentYear($year);
         $oAllYears  = \InvoiceInvoicesModel::getAllYears();
-
 
         foreach($aCustomers as $v) {
             $arrCustomers[$v['invoiceId']] = $v;

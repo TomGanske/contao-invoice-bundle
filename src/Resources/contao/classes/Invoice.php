@@ -1,4 +1,5 @@
 <?php
+
 namespace CtEye\Invoice;
 
 use Contao\BackendTemplate;
@@ -6,26 +7,31 @@ use Contao\Database;
 
 class Invoice extends InvoiceData
 {
-
-    // Load Invoices by Year
+    /**
+     * Load Invoices by Year
+     */
     private function InvoiceSelectYears()
     {
         return \Database::getInstance()->execute("SELECT YEAR(FROM_UNIXTIME(payDay)) AS payYear FROM tl_invoice_invoices GROUP BY payYear DESC")->fetchAllAssoc();
     }
 
-    // return total income of the year
+    /**
+     * return total income of the year
+     * @param int $year
+     */
     public function getTotalAmountYear($year = null){
         $result = \Contao\Database::getInstance()->prepare("SELECT SUM(price) AS amount FROM tl_invoice_invoices WHERE YEAR(FROM_UNIXTIME(payDay))=?")->execute(date("Y"))->fetchAssoc();
         return $this->priceFormat($result['amount']);
     }
 
-    // return average income by month
+    /**
+     * return average income by month
+     */
     public function getAverageIncomeByMonth()
     {
         $result = \Contao\Database::getInstance()->prepare("SELECT SUM(price) AS amount FROM tl_invoice_invoices WHERE YEAR(FROM_UNIXTIME(payDay))=?")->execute(date("Y"))->fetchAssoc();
         return $this->priceFormat($result['amount'] / 12);
     }
-
 
     /**
      * Create automatic Invoices for Web-Hosting Contracts
@@ -179,7 +185,6 @@ class Invoice extends InvoiceData
         return $objTemplate->parse();
     }
 
-
     /**
      * return Formated Date String
      * @param string $timestamp
@@ -201,7 +206,9 @@ class Invoice extends InvoiceData
         return date($f,$timestamp);
     }
 
-
+    /**
+     * Create a Hosting Invoice Document
+    */
     public static function createHostingInvoiceDocument($aData)
     {
         $dataSet        = [
@@ -262,7 +269,8 @@ class Invoice extends InvoiceData
     public function amountOverview()
     {
         // RESET CSS
-        $GLOBALS['TL_CSS'][]  = 'bundles/cteyeinvoice/css/resetBackend.css';
+        $GLOBALS['TL_CSS'][]            = 'bundles/cteyeinvoice/css/resetBackend.css';
+        $GLOBALS['TL_CSS']['bootstrap'] = 'bundles/cteyeinvoice/css/bootstrap.min.css';
 
         if(\Input::get('do')=='InvoiceInvoice'  && \Input::get('key')=='amountOverview')
         {
@@ -273,7 +281,11 @@ class Invoice extends InvoiceData
             $strAmCurYear   = [];
             $strAmLasYear   = [];
 
-
+            if(is_null($invCurYear) || is_null($invLasYear)) {
+                $oTemplate          = new \BackendTemplate('be_noData');
+                $oTemplate->noData  = $GLOBALS['TL_LANG']['Invoice']['noData'];
+                return($oTemplate->parse());
+            }
 
             while($invCurYear->next()) {
                 $strAmCurYear[] = "[Date.UTC(".date("Y",$invCurYear->payDay).",".date("m",$invCurYear->payDay).",".date("d",$invCurYear->payDay)."),".$invCurYear->totalPrice.']';

@@ -23,7 +23,7 @@ $GLOBALS['TL_DCA']['tl_invoice_invoicesElement'] = array
     (
       'mode'                  => 4,
       'fields'                => array('sorting'),
-      'headerFields'          => array('invoiceId'),
+      'headerFields'          => array('customerId'),
       'child_record_callback' => array('tl_invoice_invoicesElement','childRecord')
 	),
     'global_operations' => array
