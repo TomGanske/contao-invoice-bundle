@@ -4,7 +4,6 @@
     "description": "Contao 4 Invoice Bundle is a whole software application based on the Contao CMS 4.",
     "keywords": ["contao", "symfony", "invoice"],
     "license": "MIT",
-    "homepage": "https://www.ct-eye.com",
     "authors": [
         {
             "name": "Tom Ganske",
@@ -24,7 +23,7 @@
       "contao/manager-plugin": "<2.0 || >=3.0"
     },
     "autoload": {
-      "psr-4": {
+        "psr-4": {
           "CtEye\\InvoiceBundle\\": "src/"
         },
         "classmap": [
@@ -36,6 +35,6 @@
         ]
     },
     "extra": {
-      "contao-manager-plugin": "CtEye\\InvoiceBundle\\ContaoManager\\Plugin"
+        "contao-manager-plugin": "CtEye\\InvoiceBundle\\ContaoManager\\Plugin"
     }
 }
