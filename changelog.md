@@ -1,6 +1,12 @@
 # Contao 4 - Invoices Bundle
 
-###### Changelog 2017
+## Changelog 2018
+
+#### 0.0.6 (2018-10-03)
+   - fix sql statement by missing default value in tl_settings
+
+
+## Changelog 2017
 
 #### 0.0.5 (2017-07-16)
    - fix invoice Template

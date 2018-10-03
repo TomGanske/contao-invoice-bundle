@@ -155,7 +155,7 @@ $GLOBALS['TL_DCA']['tl_invoice_settings'] = array
         (
             'tl_class'=>'long',
         ),
-        'sql'               => "varchar(255) NOT NULL ''"
+        'sql'               => "varchar(255) NOT NULL default '' "
     ),
     'html' => array
     (
@@ -169,7 +169,8 @@ $GLOBALS['TL_DCA']['tl_invoice_settings'] = array
             'allowHtml' => true,
             'rte' => 'tinyMCE'
         ),
-        'sql'               => "text NULL"),
+        'sql'               => "text NULL"
+    ),
     'invoiceTree' => array
     (
           'label'             => &$GLOBALS['TL_LANG']['tl_invoice_settings']['invoiceTree'],

@@ -1,14 +1,17 @@
 Contao 4 - Invoice Bundle
 ---
 
+## Deprecated
+> This plugin will not longer supported or developed. If you have any questions, write me a message.
 
 ### Information
 ```
-Developer:  Tom Ganske, CT-EYE
-Website:    http://www.ct-eye.com
-Year:       2017
-Version:    0.0.5
+Developer:  Tom Hell, CT-EYE
+Website:    https://www.ct-eye.com
+Year:       2017 - 2018
+Version:    0.0.6
 CMS:        Contao 4 Bundle
+Status:		deprecated
 ```
 
 
