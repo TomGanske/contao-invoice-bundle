@@ -6,8 +6,7 @@ Contao 4 - Invoice Bundle
 
 ### Information
 ```
-Developer:  Tom Hell, CT-EYE
-Website:    https://www.ct-eye.com
+Developer:  Tom Hell
 Year:       2017 - 2018
 Version:    0.0.6
 CMS:        Contao 4 Bundle
