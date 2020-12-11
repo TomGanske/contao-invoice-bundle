@@ -10,7 +10,7 @@ Developer:  Tom Hell
 Year:       2017 - 2018
 Version:    0.0.6
 CMS:        Contao 4 Bundle
-Status:		deprecated
+Status:	    deprecated
 ```
 
 
